@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite3
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let fileUrl = try!
+            FileManager.default.url(for: .documentDirectory,
+                                    in: .userDomainMask, appropriateFor: nil, create:
+        false).appendingPathComponent("newDb13111.db")
+//
+//        do{
+//            try FileManager.default.removeItem(atPath: fileUrl.absoluteString)}
+//        catch{}
+//
+//        fileUrl = try!
+//            FileManager.default.url(for: .documentDirectory,
+//                                    in: .userDomainMask, appropriateFor: nil, create:
+//                false).appendingPathComponent("newsDb.db")
+////        //connect to db
+//        var db = Repository.openDatabase(DbPath: fileUrl.path)
+////
+//        let createTableString = """
+//            CREATE TABLE Contact(
+//            Id INT PRIMARY KEY NOT NULL,
+//            Name CHAR(255));
+//           """
+//
+////        //createTable
+//        Repository.executeSqlQuery(query: createTableString, db: db)
+////
+////        //inser        let insertStatementString = "INSERT INTO Contact (Id, Name) VALUES (?, ?);"
+////        Repository.insert(query: insertStatementString, db: db)
+//
+//        //select
+//        var queryStatementString = "SELECT * FROM Contact;"
+//        Repository.querySelect(queryStatementString: queryStatementString, db: db)
+//
+//
+//
+//            queryStatementString = "SELECT * FROM Contact;"
+//            var queryStatement: OpaquePointer? = nil
+//            var st = sqlite3_prepare_v2(db, queryStatementString, -1, &queryStatement, nil)
+//            if st == SQLITE_OK {
+//                var s = sqlite3_step(queryStatement)
+//                while (s == SQLITE_ROW) {
+//                    let id = sqlite3_column_int(queryStatement, 0)
+//                    let queryResultCol1 = sqlite3_column_text(queryStatement, 1)
+//                    let title = String(cString: queryResultCol1!)
+//                    let type = sqlite3_column_int(queryStatement, 2)
+//                    let queryResultCol3 = sqlite3_column_text(queryStatement, 3)
+//                    let text = String(cString: queryResultCol3!)
+//                    let noteType = NoteType(rawValue:Int(type))
+//                    //notes.append(Note(Id: Int(id), Title: title, Text: text, NoteType: noteType! ))
+//                }
+//
+//            } else {
+//                print("SELECT statement could not be prepared")
+//            }
+//            sqlite3_finalize(queryStatement)
+        
+        
+        
+        
+        Repository.initializeDb(DbPath: fileUrl.path)
+        
         return true
     }
 
